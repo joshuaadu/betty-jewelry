@@ -1,0 +1,24 @@
+.header-cart-btn {
+  padding: 0.5rem 3rem;
+  display: flex;
+  gap: 1rem;
+  background-color: rgb(85, 14, 14);
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border: none;
+  color: inherit;
+  transition: all 0.3s ease-out;
+}
+
+.header-cart-btn:active {
+  transform: scale(0.9);
+}
+
+.total {
+  background-color: #8a2b06;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.5rem;
+  font-weight: bold;
+}
