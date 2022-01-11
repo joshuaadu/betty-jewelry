@@ -11,7 +11,7 @@ const Header = (props) => {
       </header>
       <div className={classes["main-image"]}>
         <img
-          src="https://source.unsplash.com/N1D6PRck1bI"
+          src="https://source.unsplash.com/5UeN8VrCxvs"
           alt="A table full of delicious food!"
         />
       </div>
