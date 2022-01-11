@@ -1,0 +1,19 @@
+.button {
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #8a2b06;
+  color: white;
+  border-radius: 25px;
+  transition: all 0.3s ease-out;
+}
+
+.button:hover,
+.button:active {
+  background-color: #2c0d00;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
