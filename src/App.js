@@ -1,6 +1,5 @@
 import Header from "./components/Layout/Header";
-import AvailableMeals from "./components/Meals/AvailableMeals";
-import MealsSummary from "./components/Meals/MealsSummary";
+import Meals from "./components/Meals/Meals";
 import "./styles.css";
 
 export default function App() {
@@ -8,8 +7,7 @@ export default function App() {
     <div className="App">
       <Header />
       <main className="main">
-        <MealsSummary></MealsSummary>
-        <AvailableMeals />
+        <Meals />
       </main>
     </div>
   );
