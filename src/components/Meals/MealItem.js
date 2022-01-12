@@ -15,7 +15,7 @@ const MealItem = (props) => {
     <li className={classes["meal-item"]}>
       <div className={classes.left}>
         <span>{props.name}</span>
-        <span>{props.ingredient}</span>
+        <span>{props.description}</span>
         <span>${props.price}</span>
       </div>
       <div className={classes.right}>
