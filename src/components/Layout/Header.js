@@ -3,11 +3,18 @@ import HeaderCartButton from "./HeaderCartButton";
 import Logo from "../UI/Logo";
 import classes from "./Header.module.css";
 const Header = (props) => {
+  const cartButtonHandler = (event) => {
+    event.preventDefault();
+    props.showCart(true);
+  };
   return (
     <Fragment>
       <header className={`${classes.header} ${props.className}`}>
         <Logo></Logo>
-        <HeaderCartButton total={0}></HeaderCartButton>
+        <HeaderCartButton
+          onClick={cartButtonHandler}
+          total={0}
+        ></HeaderCartButton>
       </header>
       <div className={classes["main-image"]}>
         <img

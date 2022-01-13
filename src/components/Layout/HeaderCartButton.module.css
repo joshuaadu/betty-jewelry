@@ -29,6 +29,6 @@
 }
 
 .header-cart-btn:hover .total,
-.header-cart-btn:active .total1 {
+.header-cart-btn:active .total {
   background-color: #92320c;
 }

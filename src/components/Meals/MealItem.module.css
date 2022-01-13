@@ -17,3 +17,8 @@
   align-self: center;
   text-align: right;
 }
+
+.price {
+  color: #b33a0a;
+  font-weight: bold;
+}
