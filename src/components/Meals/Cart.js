@@ -10,7 +10,10 @@ const Cart = (props) => {
       </header>
       <main className={classes.content}>Sushi</main>
       <footer className={classes.controls}>
-        <Button onClick={props.closeCart}>Close</Button>
+        <Button altBtn={true} onClick={props.closeCart}>
+          Close
+        </Button>
+        <Button>Order</Button>
       </footer>
     </Modal>
   );
