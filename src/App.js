@@ -8,12 +8,15 @@ import "./styles.css";
 export default function App() {
   const [showCart, setShowCart] = useState(false);
 
-  const closeCartHandler = (props) => {
+  const closeCartHandler = () => {
     setShowCart(false);
+  };
+  const showCartHandler = () => {
+    setShowCart(true);
   };
   return (
     <div className="App">
-      <Header showCart={setShowCart} />
+      <Header showCart={showCartHandler} />
       <main className="main">
         <Meals />
       </main>
