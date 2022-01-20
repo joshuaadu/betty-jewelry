@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Header from "./components/Layout/Header";
 import Cart from "./components/Meals/Cart";
 import Meals from "./components/Meals/Meals";
+import CartProvider from "./components/store/CartProvider";
 import "./styles.css";
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
     setShowCart(true);
   };
   return (
-    <div className="App">
+    <CartProvider>
       <Header showCart={showCartHandler} />
       <main className="main">
         <Meals />
@@ -25,6 +26,6 @@ export default function App() {
           <Cart closeCart={closeCartHandler} />,
           document.getElementById("modal")
         )}
-    </div>
+    </CartProvider>
   );
 }

@@ -1,10 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../store/cart-context";
 import Button from "../UI/Button";
 import inputClasses from "../UI/input.module.css";
 import classes from "./MealItem.module.css";
 const MealItem = (props) => {
   const [amount, setAmount] = useState(1);
-  const addToCartButtonHandler = () => {};
+  const { addItem } = useContext(CartContext);
+  const itemSummary = {
+    name: props.name,
+    amount,
+    totalAmount: props.price * amount
+  };
+  const addToCartFormHandler = (event) => {
+    event.preventDefault();
+    console.log("add item");
+    addItem(itemSummary);
+  };
   const amountOnChange = (event) => {
     setAmount(event.target.value);
   };
@@ -18,13 +29,18 @@ const MealItem = (props) => {
         <span>{props.description}</span>
         <span className={classes.price}>${props.price}</span>
       </div>
-      <div className={classes.right}>
+      <form className={classes.right} onSubmit={addToCartFormHandler}>
         <div className={inputClasses.input}>
           <label>Amount</label>
-          <input onChange={amountOnChange} defaultValue={amount} />
+          <input
+            type="number"
+            onChange={amountOnChange}
+            defaultValue={amount}
+            min={1}
+          />
         </div>
-        <Button>+ Add</Button>
-      </div>
+        <Button type="submit">+ Add</Button>
+      </form>
     </li>
   );
 };
