@@ -8,7 +8,7 @@ const HeaderCartButton = (props) => {
       <span>
         <i className="fas fa-shopping-cart"></i>
       </span>
-      Your Cart <span className={classes.total}>{props.total}</span>
+      Your Cart <span className={classes.total}>{props.total.toFixed(2)}</span>
     </button>
   );
 };

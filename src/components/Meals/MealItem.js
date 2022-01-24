@@ -9,7 +9,7 @@ const MealItem = (props) => {
   const itemSummary = {
     name: props.name,
     amount,
-    totalAmount: props.price * amount
+    price: props.price
   };
   const addToCartFormHandler = (event) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const MealItem = (props) => {
           <input
             type="number"
             onChange={amountOnChange}
-            defaultValue={amount}
+            defaultValue={1}
             min={1}
           />
         </div>

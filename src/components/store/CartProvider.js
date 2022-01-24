@@ -1,17 +1,8 @@
+import useCart from "../hooks/useCart";
 import CartContext from "./cart-context";
-const cartContext = {
-  items: [],
-  totalAmount: 6,
-  addItem: addItemToCartHandler,
-  removeItem: removeItemFromCartHandler
-};
-
-function addItemToCartHandler(item) {
-  console.log(item);
-}
-function removeItemFromCartHandler(id) {}
 
 const CartProvider = (props) => {
+  const cartContext = useCart();
   return (
     <CartContext.Provider value={cartContext}>
       {props.children}
