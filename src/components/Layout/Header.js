@@ -11,7 +11,7 @@ const Header = (props) => {
         <Logo></Logo>
         <HeaderCartButton
           onClick={props.showCart}
-          total={context.totalAmount}
+          total={context.items.length}
         ></HeaderCartButton>
       </header>
       <div className={classes["main-image"]}>
