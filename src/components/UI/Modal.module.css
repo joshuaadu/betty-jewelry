@@ -1,0 +1,25 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.content {
+  max-width: 60rem;
+  width: 90%;
+  margin: 6rem auto;
+  display: grid;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(39, 33, 33, 0.6);
+  z-index: -1;
+}

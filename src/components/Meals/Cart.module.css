@@ -1,0 +1,28 @@
+.cart {
+  animation: cart-appear 500ms ease-out forwards;
+}
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow: auto;
+}
+
+.controls {
+  justify-self: end;
+  display: flex;
+  gap: 1rem;
+}
+
+@keyframes cart-appear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
