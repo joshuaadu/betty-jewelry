@@ -3,24 +3,30 @@ import Button from "../UI/Button";
 import classes from "./Cart.module.css";
 import { useContext } from "react";
 import CartContext from "../store/cart-context";
+import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-  const cartItems = () => {
-    return (
-      <ul>
-        {cartCtx.items.map((item) => {
-          return <li>{item.name}</li>;
-        })}
-      </ul>
-    );
-  };
+  const cartItemAddHandler = () => {};
+  const cartItemRemoveHandler = () => {};
+  const cartItems = (
+    <ul className={classes["cart-items"]}>
+      {cartCtx.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
+        />
+      ))}
+    </ul>
+  );
+
   return (
     <Modal className={classes.cart} closeModal={props.closeCart}>
-      <header className="controls">
-        <h2>Cart Details</h2>
-      </header>
-      <main className={classes.content}>Sushi</main>
+      <main className={classes.content}>{cartItems}</main>
       <footer className={classes.controls}>
         <Button altBtn={true} onClick={props.closeCart}>
           Close
