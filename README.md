@@ -1,2 +1,2 @@
-# betty-jewelry
+# BettyMeals
 Created with CodeSandbox
