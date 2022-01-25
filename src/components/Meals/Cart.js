@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const cartItemAddHandler = (item) => {
+    console.log(item);
     cartCtx.addItem(item);
   };
   const cartItemRemoveHandler = (id) => {
@@ -22,7 +23,7 @@ const Cart = (props) => {
           amount={item.amount}
           price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
-          onAdd={cartItemAddHandler.bind(null, item)}
+          onAdd={cartItemAddHandler.bind(null, { ...item, amount: 1 })}
         />
       ))}
     </ul>
@@ -30,7 +31,10 @@ const Cart = (props) => {
 
   return (
     <Modal className={classes.cart} closeModal={props.closeCart}>
-      <main className={classes.content}>{cartItems}</main>
+      <main className={classes.content}>
+        {cartItems}
+        <div></div>
+      </main>
       <footer className={classes.controls}>
         <Button altBtn={true} onClick={props.closeCart}>
           Close
