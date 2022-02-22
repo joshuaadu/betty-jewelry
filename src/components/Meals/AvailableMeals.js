@@ -9,7 +9,7 @@ const AvailableMeals = () => {
   const mealsList = isLoading ? (
     <p>Loading meals info...</p>
   ) : error ? (
-    <p>error</p>
+    <p>{error}</p>
   ) : (
     data.map((meal) => (
       <MealItem
