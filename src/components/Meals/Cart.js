@@ -7,6 +7,11 @@ import CartItem from "./CartItem";
 import CheckoutForm from "./checkoutForm";
 
 const Cart = (props) => {
+  const nameRef = useRef();
+  const streetRef = useRef();
+  const codeRef = useRef();
+  const cityRef = useRef();
+  const refs = useRef({ nameRef, streetRef, codeRef, cityRef });
   const cartCtx = useContext(CartContext);
   const cartItemAddHandler = (item) => {
     console.log(item);
@@ -34,7 +39,7 @@ const Cart = (props) => {
     <Modal className={classes.cart} closeModal={props.closeCart}>
       <main className={classes.content}>
         {cartItems}
-        {cartCtx.items.length > 0 && <CheckoutForm />}
+        {cartCtx.items.length > 0 && <CheckoutForm ref={refs} />}
       </main>
       <footer className={classes.controls}>
         <Button altBtn={true} onClick={props.closeCart}>

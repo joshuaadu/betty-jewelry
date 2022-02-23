@@ -1,25 +1,28 @@
+import { forwardRef } from "react";
 import classes from "./checkoutForm.module.css";
-const CheckoutForm = (props) => {
+const CheckoutForm = forwardRef((props, ref) => {
+  const { nameRef, streetRef, codeRef, cityRef } = ref.current;
+
   return (
     <div className={classes["checkout-form"]}>
       <div className={classes["form-control"]}>
-        <label for="name">Your name</label>
-        <input type="text" id="name" />
+        <label htmlFor="name">Your name</label>
+        <input ref={nameRef} type="text" id="name" />
       </div>
       <div className={classes["form-control"]}>
-        <label for="street">Street</label>
-        <input type="text" id="street" />
+        <label htmlFor="street">Street</label>
+        <input ref={streetRef} type="text" id="street" />
       </div>
       <div className={classes["form-control"]}>
-        <label for="code">Postal Code</label>
-        <input type="number" id="code" />
+        <label htmlFor="code">Postal Code</label>
+        <input ref={codeRef} type="number" id="code" />
       </div>
       <div className={classes["form-control"]}>
-        <label for="city">City</label>
-        <input type="text" id="city" />
+        <label htmlFor="city">City</label>
+        <input ref={cityRef} type="text" id="city" />
       </div>
     </div>
   );
-};
+});
 
 export default CheckoutForm;
