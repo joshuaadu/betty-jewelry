@@ -22,7 +22,7 @@ const CheckoutForm = (props) => {
   };
 
   return (
-    <form className={classes["checkout-form"]}>
+    <form className={classes["checkout-form"]} onSubmit={confirmHandler}>
       <div className={classes["form-control"]}>
         <label htmlFor="name">Your name</label>
         <input ref={nameRef} type="text" id="name" />
@@ -43,7 +43,7 @@ const CheckoutForm = (props) => {
         <Button altBtn={true} onClick={props.onClose}>
           Close
         </Button>
-        <Button onClick={confirmHandler}>Confirm</Button>
+        <Button type="submit">Confirm</Button>
       </div>
     </form>
   );
