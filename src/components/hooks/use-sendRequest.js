@@ -5,6 +5,19 @@ const useSendRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const submitOrder = async (orderData) => {
+    const response = await fetch(
+      "https://react-form-fd387-default-rtdb.firebaseio.com/order.json",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+      }
+    ).then((data) => data.json());
+    console.log(response);
+  };
   const fetchMeals = useCallback(async (applydata) => {
     setIsLoading(true);
     setError(null);
@@ -31,7 +44,7 @@ const useSendRequest = () => {
     fetchMeals();
   }, [fetchMeals]);
 
-  return { data, isLoading, error };
+  return { data, isLoading, error, submitOrder };
 };
 
 export default useSendRequest;

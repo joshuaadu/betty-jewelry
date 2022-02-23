@@ -5,6 +5,7 @@ import { useContext, useRef } from "react";
 import CartContext from "../store/cart-context";
 import CartItem from "./CartItem";
 import CheckoutForm from "./checkoutForm";
+import useSendRequest from "../hooks/use-sendRequest";
 
 const Cart = (props) => {
   const nameRef = useRef();
@@ -12,6 +13,7 @@ const Cart = (props) => {
   const codeRef = useRef();
   const cityRef = useRef();
   const refs = useRef({ nameRef, streetRef, codeRef, cityRef });
+  const { submitOrder } = useSendRequest();
   const cartCtx = useContext(CartContext);
   const cartItemAddHandler = (item) => {
     console.log(item);
@@ -35,6 +37,18 @@ const Cart = (props) => {
     </ul>
   );
 
+  const orderHandler = () => {
+    const orderData = {
+      name: nameRef.current.value,
+      street: streetRef.current.value,
+      code: codeRef.current.value,
+      city: cityRef.current.value
+    };
+    submitOrder(orderData);
+    // props.closeCart();
+    console.log(orderData);
+  };
+
   return (
     <Modal className={classes.cart} closeModal={props.closeCart}>
       <main className={classes.content}>
@@ -45,7 +59,9 @@ const Cart = (props) => {
         <Button altBtn={true} onClick={props.closeCart}>
           Close
         </Button>
-        {cartCtx.items.length > 0 && <Button>Order</Button>}
+        {cartCtx.items.length > 0 && (
+          <Button onClick={orderHandler}>Order</Button>
+        )}
       </footer>
     </Modal>
   );
