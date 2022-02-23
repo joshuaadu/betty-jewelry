@@ -1,19 +1,14 @@
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import classes from "./Cart.module.css";
-import { useContext, useRef } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../store/cart-context";
 import CartItem from "./CartItem";
 import CheckoutForm from "./checkoutForm";
-import useSendRequest from "../hooks/use-sendRequest";
 
 const Cart = (props) => {
-  const nameRef = useRef();
-  const streetRef = useRef();
-  const codeRef = useRef();
-  const cityRef = useRef();
-  const refs = useRef({ nameRef, streetRef, codeRef, cityRef });
-  const { submitOrder } = useSendRequest();
+  const [showCheckout, setShowCheckout] = useState(false);
+
   const cartCtx = useContext(CartContext);
   const cartItemAddHandler = (item) => {
     console.log(item);
@@ -38,28 +33,22 @@ const Cart = (props) => {
   );
 
   const orderHandler = () => {
-    const orderData = {
-      name: nameRef.current.value,
-      street: streetRef.current.value,
-      code: codeRef.current.value,
-      city: cityRef.current.value
-    };
-    submitOrder(orderData);
-    // props.closeCart();
-    console.log(orderData);
+    setShowCheckout(true);
   };
 
   return (
     <Modal className={classes.cart} closeModal={props.closeCart}>
       <main className={classes.content}>
         {cartItems}
-        {cartCtx.items.length > 0 && <CheckoutForm ref={refs} />}
+        {showCheckout && <CheckoutForm onClose={props.closeCart} />}
       </main>
       <footer className={classes.controls}>
-        <Button altBtn={true} onClick={props.closeCart}>
-          Close
-        </Button>
-        {cartCtx.items.length > 0 && (
+        {!showCheckout && (
+          <Button altBtn={true} onClick={props.closeCart}>
+            Close
+          </Button>
+        )}
+        {cartCtx.items.length > 0 && !showCheckout && (
           <Button onClick={orderHandler}>Order</Button>
         )}
       </footer>
