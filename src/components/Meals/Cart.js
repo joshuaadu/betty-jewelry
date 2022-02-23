@@ -1,9 +1,10 @@
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import classes from "./Cart.module.css";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import CartContext from "../store/cart-context";
 import CartItem from "./CartItem";
+import CheckoutForm from "./checkoutForm";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
@@ -33,7 +34,7 @@ const Cart = (props) => {
     <Modal className={classes.cart} closeModal={props.closeCart}>
       <main className={classes.content}>
         {cartItems}
-        <div></div>
+        {cartCtx.items.length > 0 && <CheckoutForm />}
       </main>
       <footer className={classes.controls}>
         <Button altBtn={true} onClick={props.closeCart}>
