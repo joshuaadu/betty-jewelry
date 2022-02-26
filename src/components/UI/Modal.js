@@ -1,11 +1,12 @@
+import { Fragment } from "react";
 import Card from "./Card";
 import classes from "./Modal.module.css";
 const Modal = (props) => {
   return (
-    <div className={`${classes.modal} ${props.className}`}>
+    <Fragment>
       <div className={classes.backdrop} onClick={props.closeModal}></div>
-      <Card className={classes.content}>{props.children}</Card>
-    </div>
+      <Card className={classes.modal}>{props.children}</Card>
+    </Fragment>
   );
 };
 
