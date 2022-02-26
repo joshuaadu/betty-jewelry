@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useInput from "../hooks/use-input";
 import useSendRequest from "../hooks/use-sendRequest";
 import Button from "../UI/Button";
@@ -7,9 +8,10 @@ const textIsValid = (text) => {
   return text.trim() !== "";
 };
 
-const numISValid = (num) => {
-  return num > 0;
+const codeIsValid = (num) => {
+  return num.length > 3 && num > 0;
 };
+
 const CheckoutForm = (props) => {
   const {
     value: nameValue,
@@ -31,7 +33,7 @@ const CheckoutForm = (props) => {
     error: postalError,
     blurhandler: postalBlurHandler,
     changeHandler: postalChangeHandler
-  } = useInput(numISValid);
+  } = useInput(codeIsValid);
   const {
     value: cityValue,
     isValid: cityIsValid,
@@ -40,8 +42,8 @@ const CheckoutForm = (props) => {
     changeHandler: cityChangeHandler
   } = useInput(textIsValid);
 
-  const { submitOrder } = useSendRequest();
-
+  const { submitOrder, isSubmitting, hasSubmitted } = useSendRequest();
+  const { onClose, onSubmit, order } = props;
   const checkoutIsValid =
     nameIsValid && streetIsValid && cityIsValid && postalIsValid;
 
@@ -51,16 +53,23 @@ const CheckoutForm = (props) => {
       console.log("checkout", checkoutIsValid);
       return;
     }
+
     const orderData = {
       name: nameValue,
       street: streetValue,
       postal: postalValue,
       city: postalValue
     };
-    submitOrder(orderData);
-    props.onClose();
-    console.log(orderData);
+
+    submitOrder({
+      user: orderData,
+      orderedItems: order
+    });
   };
+
+  useEffect(() => {
+    onSubmit(hasSubmitted);
+  }, [onSubmit, hasSubmitted]);
 
   return (
     <form className={classes["checkout-form"]} onSubmit={confirmHandler}>
@@ -78,7 +87,7 @@ const CheckoutForm = (props) => {
           id="name"
         />
         {nameError && (
-          <p className={classes["error-text"]}>Please enter your name!</p>
+          <p className={classes["error-text"]}>Please enter a valid name!</p>
         )}
       </div>
       <div
@@ -95,7 +104,7 @@ const CheckoutForm = (props) => {
           id="street"
         />
         {streetError && (
-          <p className={classes["error-text"]}>Please enter your street!</p>
+          <p className={classes["error-text"]}>Please enter a valid street!</p>
         )}
       </div>
       <div
@@ -113,7 +122,7 @@ const CheckoutForm = (props) => {
         />
         {postalError && (
           <p className={classes["error-text"]}>
-            Please enter your Postal address!
+            Please enter a valid Postal address!
           </p>
         )}
       </div>
@@ -131,11 +140,12 @@ const CheckoutForm = (props) => {
           id="city"
         />
         {cityError && (
-          <p className={classes["error-text"]}>Please enter your city!</p>
+          <p className={classes["error-text"]}>Please enter a valid city!</p>
         )}
       </div>
+      {isSubmitting && <div>Submitting Order...</div>}
       <div className={classes.controls}>
-        <Button altBtn={true} onClick={props.onClose}>
+        <Button altBtn={true} onClick={onClose}>
           Close
         </Button>
         <Button type="submit">Confirm</Button>

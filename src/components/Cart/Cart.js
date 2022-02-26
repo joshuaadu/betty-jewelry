@@ -8,6 +8,8 @@ import CheckoutForm from "./checkoutForm";
 
 const Cart = (props) => {
   const [showCheckout, setShowCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const cartCtx = useContext(CartContext);
   const cartItemAddHandler = (item) => {
@@ -35,6 +37,7 @@ const Cart = (props) => {
   const orderHandler = () => {
     setShowCheckout(true);
   };
+
   const modalActions = (
     <Fragment>
       <Button altBtn={true} onClick={props.closeCart}>
@@ -46,11 +49,34 @@ const Cart = (props) => {
       )}
     </Fragment>
   );
+
+  const submissionContent = hasSubmitted ? (
+    <Fragment>
+      <p>Order Submitted!</p>
+      <footer className={classes.controls}>
+        <Button altBtn={true} onClick={props.closeCart}>
+          Close
+        </Button>
+      </footer>
+    </Fragment>
+  ) : (
+    ""
+  );
+  const orderSubmit = (hasSubmitted) => {
+    setHasSubmitted(hasSubmitted);
+  };
   return (
     <Modal className={classes.cart} closeModal={props.closeCart}>
       <main className={classes.content}>
-        {cartItems}
-        {showCheckout && <CheckoutForm onClose={props.closeCart} />}
+        {!hasSubmitted && cartItems}
+        {!hasSubmitted && showCheckout && (
+          <CheckoutForm
+            order={cartCtx.items}
+            onSubmit={orderSubmit}
+            onClose={props.closeCart}
+          />
+        )}
+        {submissionContent}
       </main>
       <footer className={classes.controls}>
         {!showCheckout && modalActions}
