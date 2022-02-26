@@ -52,7 +52,7 @@ const cartReducer = (state, action) => {
     };
   }
   if (action.type === "RESET") {
-    state.items = [];
+    return defaultCartState;
   }
   return defaultCartState;
 };
@@ -68,7 +68,7 @@ const useCart = () => {
   function removeItemFromCartHandler(id) {
     dispatchCartAction({ type: "REMOVE", id: id });
   }
-  function resetCart() {
+  function resetCartHandler() {
     dispatchCartAction({ type: "RESET" });
   }
   const cartObject = {
@@ -76,7 +76,7 @@ const useCart = () => {
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
-    reset: resetCart
+    reset: resetCartHandler
   };
 
   return cartObject;
