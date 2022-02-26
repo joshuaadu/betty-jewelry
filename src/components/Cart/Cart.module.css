@@ -10,7 +10,8 @@
 }
 
 .controls {
-  justify-self: end;
+  width: 100%;
+  justify-content: end;
   display: flex;
   gap: 1rem;
 }
