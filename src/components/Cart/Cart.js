@@ -8,7 +8,6 @@ import CheckoutForm from "./checkoutForm";
 
 const Cart = (props) => {
   const [showCheckout, setShowCheckout] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const cartCtx = useContext(CartContext);
@@ -56,6 +55,7 @@ const Cart = (props) => {
       <footer className={classes.controls}>
         <Button altBtn={true} onClick={props.closeCart}>
           Close
+          {cartCtx.reset()}
         </Button>
       </footer>
     </Fragment>

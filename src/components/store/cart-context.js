@@ -4,7 +4,8 @@ const initialValue = {
   items: [],
   totalAmount: 0,
   addItem: (item) => {},
-  removeItem: (id) => {}
+  removeItem: (id) => {},
+  reset: () => {}
 };
 
 const CartContext = React.createContext(initialValue);
